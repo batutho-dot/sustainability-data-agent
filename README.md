@@ -6,7 +6,7 @@ A small agent that answers energy questions no single source can, using two MCP 
 
 10 questions that each need both servers. A plain script computes the right answers from the same two public APIs.
 
-**Score: 10 out of 10** with Claude Haiku 5.5 (0.022 USD for all 10) and **10 out of 10** with Claude Sonnet 5.5 (0.354 USD), one run each, 2026-11-19. Each server scored 10/10 on its own questions. Here both run unchanged, pinned to one commit each, behind one agent.
+**Score: 10 out of 10 in each of 3 runs** with Claude Haiku 5.5 (mean 0.0215 USD per run of 10 questions) and **10 out of 10 in each of 3 runs** with Claude Sonnet 5.5 (mean 0.379 USD per run), 2026-11-19. A first run per model, the same day, also scored 10/10. Each server scored 10/10 on its own questions. Here both run unchanged, pinned to one commit each, behind one agent.
 
 ```mermaid
 flowchart LR
@@ -44,14 +44,18 @@ More diagrams: [docs/architecture.md](docs/architecture.md).
 | q09 | DK minus EU27 renewable share in electricity 2024; cleanest 3 h DK1 17 Nov | 32.152 pp; starts 21:00 | right (2) | right (3) |
 | q10 | DK renewable share change 2015 to 2024; DK1 minus DK2 CO2 18 Nov | 15.992 pp; -0.55 g/kWh | right (4) | right (4) |
 
-Numbers in brackets are tool calls. Every question used at least one tool from each server.
+This table is the first run per model; numbers in brackets are tool calls. Every question used at least one tool from each server. In the 3 later runs per model, every question was right every time.
 
-| Model | Score | Tokens in | Tokens out | Cost | Model requests |
-|---|---|---|---|---|---|
-| Claude Haiku 5.5 | 10/10 | 169,450 | 10,103 | 0.0220 USD | 31 |
-| Claude Sonnet 5.5 | 10/10 | 146,419 | 6,100 | 0.3538 USD | 29 |
+Three runs per model, 10 questions each:
 
-Cost is computed from reported tokens and the list prices in `src/sustainability_data_agent/pricing.py`, not from an invoice. Total spent here, with one unscored demo question: 0.3782 USD (`eval/results/spend.jsonl`).
+| Model | Score per run | Mean | Min to max | Cost per run (mean, min to max) | Tokens in per run (mean) | Tokens out per run (mean) | Tool calls per run | Tool errors per run |
+|---|---|---|---|---|---|---|---|---|
+| Claude Haiku 5.5 | 10, 10, 10 | 10.0 | 10 to 10 | 0.0215 USD (0.0212 to 0.0221) | 168,679 | 9,347 | 33 to 36 | 1 to 3 |
+| Claude Sonnet 5.5 | 10, 10, 10 | 10.0 | 10 to 10 | 0.3792 USD (0.3682 to 0.3995) | 156,516 | 6,619 | 32 to 34 | 2 to 3 |
+
+Run files: `eval/results/claude-haiku-5-5-20261119-{2248,2249,2255}.json` and `eval/results/claude-sonnet-5-5-20261119-{2302,2309,2315}.json`. A tool error is a call the server rejected (mostly a guessed filter name); the model read the error and retried.
+
+Cost is computed from reported tokens and the list prices in `src/sustainability_data_agent/pricing.py`, not from an invoice. Total spent on this repository: 1.6158 USD (`eval/results/spend.jsonl`). That covers the 8 full runs, one unscored demo question, and 0.0353 USD for two runs I stopped part way and one single-question check.
 
 ## Run it
 
@@ -112,7 +116,7 @@ Right means every key is present, each number is within tolerance (0.01 for perc
 
 ## Limits
 
-- 10 questions, one run per model; 10/10 does not say every phrasing works. The grid questions use fixed past days (17 and 18 November 2026). Forecasts are not scored.
+- 10 questions, 4 runs per model; 40 out of 40 right per model does not say every phrasing works. The grid questions use fixed past days (17 and 18 November 2026). Forecasts are not scored.
 - Eurostat revises data. `expected.json` holds the values downloaded on 2026-11-19 (nrg_ind_ren updated 2026-09-15, nrg_pc_204 updated 2026-10-19). Run `eval/reference.py --refresh` before a new paid run.
 - Each question names its Eurostat dataset (for example `nrg_pc_204`, band DC), because "the household price" alone has several readings. Some compare a November 2026 spot price with a 2026-S1 household price, as published.
 - Day-ahead prices exclude taxes, tariffs and grid fees. Eurostat household prices include them unless the question says otherwise.
