@@ -1,0 +1,5 @@
+# The two MCP servers, each pinned to one commit (snapshots made with `git archive`, see vendor/README.md)
+./vendor/energidata-mcp-b7a71f7.tar.gz
+./vendor/eurostat-mcp-7d1aeee.tar.gz
+# This agent, with the test tools
+-e .[dev]

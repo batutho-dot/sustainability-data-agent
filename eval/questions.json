@@ -1,0 +1,75 @@
+{
+  "note": "Each question needs both servers: Energi Data Service (Danish grid) and Eurostat (EU statistics). 'answer' lists the keys the agent must return on its final ANSWER line; 'tolerance' is the allowed absolute difference per numeric key ('rel' marks a relative tolerance). 'kind' says whether the two sources are combined in one calculation or put side by side.",
+  "questions": [
+    {
+      "id": "q01",
+      "kind": "side by side",
+      "question": "By how many percentage points was Denmark's overall share of renewable energy in 2024 above the EU27 average (Eurostat, nrg_ind_ren, nrg_bal REN)? And which hour on 18 November 2026 had the lowest CO2 intensity in price area DK1?",
+      "answer": {"gap_pp": "number", "hour": "HH:00"},
+      "tolerance": {"gap_pp": 0.01}
+    },
+    {
+      "id": "q02",
+      "kind": "combined",
+      "question": "Take the mean day-ahead spot price in DK1 on 17 November 2026 in EUR/MWh. What percentage is it of the Danish household electricity price in 2026-S1 (Eurostat nrg_pc_204, band DC 2500-4999 kWh, all taxes included, EUR/kWh)? Convert units first.",
+      "answer": {"spot_eur_mwh": "number", "household_eur_kwh": "number", "pct": "number"},
+      "tolerance": {"spot_eur_mwh": 0.01, "household_eur_kwh": 0.0001, "pct": 0.1}
+    },
+    {
+      "id": "q03",
+      "kind": "combined",
+      "question": "Take the mean day-ahead spot price in DK2 on 18 November 2026 in EUR/MWh. What percentage is it of the Danish household electricity price excluding taxes and levies in 2026-S1 (Eurostat nrg_pc_204, band DC, EUR/kWh)? Convert units first.",
+      "answer": {"spot_eur_mwh": "number", "household_eur_kwh": "number", "pct": "number"},
+      "tolerance": {"spot_eur_mwh": 0.01, "household_eur_kwh": 0.0001, "pct": 0.1}
+    },
+    {
+      "id": "q04",
+      "kind": "combined",
+      "question": "How many times higher was the Danish household electricity price in 2026-S1 (Eurostat nrg_pc_204, band DC, all taxes, EUR/kWh) than the cheapest single hour of the DK1 day-ahead spot price on 18 November 2026 (in EUR/kWh)?",
+      "answer": {"cheapest_hour": "HH:00", "ratio": "number"},
+      "tolerance": {"ratio": {"rel": 0.005}}
+    },
+    {
+      "id": "q05",
+      "kind": "side by side",
+      "question": "Which Danish price area, DK1 or DK2, had the lower mean CO2 intensity over the whole day of 17 November 2026? And what was Denmark's share of renewable energy in electricity in 2024 (Eurostat nrg_ind_ren, nrg_bal REN_ELC, percent)?",
+      "answer": {"area": "DK1 or DK2", "share_pct": "number"},
+      "tolerance": {"share_pct": 0.01}
+    },
+    {
+      "id": "q06",
+      "kind": "side by side",
+      "question": "Which EU27 member state had the highest household electricity price in 2026-S1 (Eurostat nrg_pc_204, band DC, all taxes, EUR/kWh)? Give its two-letter Eurostat code. And which hour on 17 November 2026 had the highest DK2 day-ahead spot price, and what was it in EUR/MWh?",
+      "answer": {"country": "two-letter code", "hour": "HH:00", "price_eur_mwh": "number"},
+      "tolerance": {"price_eur_mwh": 0.01}
+    },
+    {
+      "id": "q07",
+      "kind": "combined",
+      "question": "Find the cheapest block of 3 consecutive hours in DK1 on 17 November 2026 by day-ahead spot price in EUR/MWh. What is the block's mean as a percentage of the EU27 average household electricity price in 2026-S1 (Eurostat nrg_pc_204, geo EU27_2020, band DC, all taxes, EUR/kWh)?",
+      "answer": {"block_start": "HH:00", "pct": "number"},
+      "tolerance": {"pct": 0.1}
+    },
+    {
+      "id": "q08",
+      "kind": "side by side",
+      "question": "How much more expensive per kWh was household electricity in Germany than in Denmark in 2026-S1 (Eurostat nrg_pc_204, band DC, all taxes, EUR/kWh; negative if cheaper)? And what was the mean CO2 intensity in DK1 over the whole day of 18 November 2026 in g/kWh?",
+      "answer": {"de_minus_dk_eur_kwh": "number", "co2_g_kwh": "number"},
+      "tolerance": {"de_minus_dk_eur_kwh": 0.0001, "co2_g_kwh": 0.01}
+    },
+    {
+      "id": "q09",
+      "kind": "side by side",
+      "question": "By how many percentage points did Denmark's share of renewable energy in electricity exceed the EU27 average in 2024 (Eurostat nrg_ind_ren, nrg_bal REN_ELC)? And at what hour did the cleanest block of 3 consecutive hours (lowest mean CO2 intensity) start in DK1 on 17 November 2026?",
+      "answer": {"gap_pp": "number", "block_start": "HH:00"},
+      "tolerance": {"gap_pp": 0.01}
+    },
+    {
+      "id": "q10",
+      "kind": "side by side",
+      "question": "Denmark's overall share of renewable energy changed by how many percentage points from 2015 to 2024 (Eurostat nrg_ind_ren, nrg_bal REN)? And by how many g/kWh was the whole-day mean CO2 intensity of DK1 higher than that of DK2 on 18 November 2026 (negative if lower)?",
+      "answer": {"change_pp": "number", "dk1_minus_dk2_g_kwh": "number"},
+      "tolerance": {"change_pp": 0.01, "dk1_minus_dk2_g_kwh": 0.01}
+    }
+  ]
+}

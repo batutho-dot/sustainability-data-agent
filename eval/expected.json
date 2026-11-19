@@ -1,0 +1,56 @@
+{
+  "computed_by": "eval/reference.py (standard library, no model, no MCP)",
+  "sources": {
+    "energi_data_service": "CO2Emis and DayAheadPrices, DK1 and DK2, 2026-11-17T00:00 to 2026-11-19T00:00 Danish time",
+    "eurostat": {
+      "nrg_ind_ren": "2026-09-15T23:00:00+0200",
+      "nrg_pc_204": "2026-10-19T23:00:00+0200",
+      "eu27_prices_reported": 27
+    }
+  },
+  "answers": {
+    "q01": {
+      "gap_pp": 21.22,
+      "hour": "18:00"
+    },
+    "q02": {
+      "spot_eur_mwh": 209.1663535,
+      "household_eur_kwh": 0.2375,
+      "pct": 88.07004357894738
+    },
+    "q03": {
+      "spot_eur_mwh": 177.57052169791666,
+      "household_eur_kwh": 0.1889,
+      "pct": 94.00239369926767
+    },
+    "q04": {
+      "cheapest_hour": "04:00",
+      "ratio": 2.380355758801077
+    },
+    "q05": {
+      "area": "DK2",
+      "share_pct": 79.655
+    },
+    "q06": {
+      "country": "IE",
+      "hour": "09:00",
+      "price_eur_mwh": 266.965004
+    },
+    "q07": {
+      "block_start": "21:00",
+      "pct": 59.312322916666666
+    },
+    "q08": {
+      "de_minus_dk_eur_kwh": 0.12430000000000002,
+      "co2_g_kwh": 120.9236111111111
+    },
+    "q09": {
+      "gap_pp": 32.152,
+      "block_start": "21:00"
+    },
+    "q10": {
+      "change_pp": 15.991999999999997,
+      "dk1_minus_dk2_g_kwh": -0.5520833333333428
+    }
+  }
+}
