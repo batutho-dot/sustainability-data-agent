@@ -57,6 +57,10 @@ export ANTHROPIC_API_KEY=...                        # PowerShell: $env:ANTHROPIC
 .venv/Scripts/python -m sustainability_data_agent "How does Denmark's renewable share compare with the EU average?"
 ```
 
+On Windows, keep the clone in a short path (for example `C:\code\sustainability-data-agent`)
+or turn on long path support: the `anthropic` package has files whose full path inside a venv
+passes Windows' 260-character limit when the folder is deep, and pip then stops halfway.
+
 `requirements.txt` installs the two servers from `vendor/` (snapshots of one commit each, see
 [vendor/README.md](vendor/README.md)) and this agent. The agent starts both servers itself;
 nothing else needs to run. Add `--model claude-sonnet-5-5` for Sonnet; Haiku 5.5 is the default.
