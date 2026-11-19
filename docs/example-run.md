@@ -1,13 +1,8 @@
 # Example run
 
-Run on 2026-11-19 at about 04:00 Danish time with Claude Haiku 5.5. Not part of the scored eval.
-The Eurostat numbers in the answer were checked afterwards against a direct request to dataset
-`sdg_07_40` (geo DK and EU27_2020, last 3 periods): 48.2 and 26.2 for 2025 (both flagged p, provisional),
-46.461 and 25.241 for 2024, 43.728 and 24.579 for 2023. All match.
+Run on 2026-11-19 at about 04:00 Danish time with Claude Haiku 5.5, outside the scored eval. I checked the Eurostat numbers against a direct request to dataset `sdg_07_40` (geo DK and EU27_2020, last 3 periods): 48.2 and 26.2 for 2025 (both flagged p, provisional), 46.461 and 25.241 for 2024, 43.728 and 24.579 for 2023. All match.
 
-The CO2 forecast for the next day was not published yet at that hour, so both energidata calls
-returned a tool error, and the agent said so instead of guessing. Whether the same question finds the
-hours once the forecast is out was not tested tonight.
+The next day's CO2 forecast was not out yet, so both energidata calls returned a tool error and the agent said so. I did not retest once the forecast is published.
 
 ```text
 Q: How does Denmark's share of renewable energy compare with the EU average in the latest year Eurostat has? And which 3 hours tomorrow are forecast to have the cleanest power in DK1?
